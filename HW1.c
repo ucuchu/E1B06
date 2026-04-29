@@ -17,15 +17,15 @@ int main(){
 	/*2.password input and verification*/
 	int password;
 	printf("請輸入4位數密碼:");
-	fflush(stdin);	//清除輸入緩衝區
+	fflush(stdin);	//clear input buffer
 	scanf("%d",&password);
-	//判斷密碼是否為2026
+	//check if the password is 2026
 	if(password==2026){
 		printf("密碼正確!歡迎進入系統。\n");
 		system("PAUSE");
 		system("CLS");
 	}
-	//密碼錯誤則發出警示音並結束程式
+	//if the password is incorrect, an alarm sound will be emitted and the program will terminate.
 	else{
 		printf("密碼錯誤!\a");
 		return 0;
@@ -48,18 +48,20 @@ int main(){
     scanf("%c",&cin);
     
     if(cin>='A'&&cin<='Z')
-    	printf("Uppercase\n");	//大寫字母
+    	printf("Uppercase\n");	//uppercase letter
     else if(cin>='a'&&cin<='z')
-    	printf("Lowercase\n");	//小寫字母
+    	printf("Lowercase\n");	//lowercase letter
     else if(cin>='0'&&cin<='9')
-    	printf("Digit\n");	//數字
+    	printf("Digit\n");	//number
 	else
-		printf("E1B06褚宥彤\n");	//若非以上類別，輸出個人資訊
+		printf("E1B06褚宥彤\n");	//if it does not fall into the above categories, output personal information.
 		
 	system("PAUSE");
 	return 0;
 } 
 
-/*5.reflection
-
-*/
+/*5.reflection*/
+/*This project was a great review of if-else logic and character judgment.
+I realized that getting the UI to align perfectly is actually quite a tedious task that requires a lot of patience!
+I also successfully handled the issue of newline characters remaining in the input buffer.
+Practicing this program gave me new insights into logical thinking and helped me feel much more confident in using programming commands.*/
