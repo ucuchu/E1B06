@@ -74,33 +74,57 @@ int main(){
 					}
 					printf("\n");
 				}
+				system("PAUSE");
+				system("CLS");
 				break;
 				
 			/*4.show multiplication table*/	
 			case 'B':
     		case 'b':
-				printf("請輸入一個1到9的整數:");
-				fflush(stdin);
-    			scanf(" %d",&number);
+    			while(1){
+					printf("請輸入一個1到9的整數:");
+					fflush(stdin);
+    				scanf(" %d",&number);
+    				if(number>=1&&number<=9){
+    					break;
+					}
+					if(number<1||number>9){
+    					printf("數字不在1到9之間，請重新輸入。\n");	
+					}
+				}
     			for(i=1;i<=number;i++){
     				for(j=1;j<=number;j++){
     					printf("\t%d*%d=%d ",i,j,i*j);
 					}
 					printf("\n");
 				}
-    			
+				system("PAUSE");
+				system("CLS");
 				break;
+				
 			/*5.end*/	
 			case 'C':
     		case 'c':	
-    		
+    			while(1){
+					printf("Continue?(y/n)" );
+					fflush(stdin);
+    				scanf(" %c",&letter);
+    				if(letter=='Y'||letter=='y'){
+    					break;
+					}
+					if(letter=='N'||letter=='n'){
+    					printf("程式結束。");	
+    					return 0;
+					}
+					else{
+						printf("輸入錯誤，請重新輸入。\n");	 
+					}
+				}
     			break;
     		default:
     			printf("輸入錯誤，請重新輸入。\n");
-    			getch();
+    			system("PAUSE");
 		}
-    
 	}
-	
 	return 0;
 }
