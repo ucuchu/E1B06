@@ -124,6 +124,7 @@ int main(){
 				system("PAUSE");
 				system("CLS");
     			break;
+    			
     		default:
     			printf("輸入錯誤，請重新輸入。\n");
     			system("PAUSE");
@@ -135,5 +136,8 @@ int main(){
 }
 
 /*6.reflection*/
-/*
-*/
+/*This assignment allowed me to practice using loops.
+I found the most difficult part to be drawing the triangle, as the logic for incrementing values was quite confusing.
+However, it made me much more familiar with nested loops.
+Another error-prone area was character input, such as scanf reading the Enter key.
+Through continuous debugging, I now have a deeper understanding of program logic.*/
