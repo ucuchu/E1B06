@@ -13,12 +13,12 @@ int main(){
 	printf("******************************************\n");
 	
 	//password input and verification
-	int password,i=0;
+	int password,n=0;
 	do{
 		printf("請輸入4位數密碼:");
 		fflush(stdin);	//clear input buffer
-		scanf("%d",&password);
-		i++;
+		scanf(" %d",&password);
+		n++;
 		//check if the password is 2026
 		if(password==2026){
 			printf("密碼正確!歡迎進入系統。\n");
@@ -26,21 +26,81 @@ int main(){
 			system("CLS");
 		}
 		//if the password is entered incorrectly three times, an alarm will sound and the program will terminate.
-		else if(i==3){
+		else if(n==3){
 			printf("密碼錯誤!\a");
 			return 0;
 		}
 	}while(password!=2026);
 	
-	/*2.show main menu*/
-	printf("------------------------------------------\n");
-    printf("|                                        |\n");
-    printf("|  a. 畫出直角三角形                     |\n");
-    printf("|  b. 顯示乘法表                         |\n");
-    printf("|  c. 結束                               |\n");
-    printf("|                                        |\n");
-    printf("------------------------------------------\n");
+	/*2.show main menu*/	
+	while(1){
+		printf("------------------------------------------\n");
+    	printf("|                                        |\n");
+    	printf("|  a. 畫出直角三角形                     |\n");
+    	printf("|  b. 顯示乘法表                         |\n");
+    	printf("|  c. 結束                               |\n");
+    	printf("|                                        |\n");
+    	printf("------------------------------------------\n");
+    
+    	char ch,letter;
+    	int i,j,number;
+    	printf("請輸入選項:");
+    	fflush(stdin);
+    	scanf(" %c",&ch); 
+    	
+    	switch(ch){
+    		/*3.draw a right triangle*/
+    		case 'A':
+    		case 'a':
+				while(1){
+					printf("請輸入一個'a'到'n'的字元:");
+					fflush(stdin);
+    				scanf(" %c",&letter);
+    				if(letter>='a'&&letter<='n'){
+    					break;
+					}
+					if(letter<'a'||letter>'n'){
+    					printf("字元不在'a'到'n'之間，請重新輸入。\n");	
+					}
+				}
+    			for(i=1;i<=letter-'a'+1;i++){
+    				//print out blank
+    				for(j=0;j<=letter-'a'-i;j++){
+    					printf(" ");
+					} 
+					//print out characters
+					for(j=i-1;j>=0;j--){
+						printf("%c",letter-j);
+					}
+					printf("\n");
+				}
+				break;
+				
+			/*4.show multiplication table*/	
+			case 'B':
+    		case 'b':
+				printf("請輸入一個1到9的整數:");
+				fflush(stdin);
+    			scanf(" %d",&number);
+    			for(i=1;i<=number;i++){
+    				for(j=1;j<=number;j++){
+    					printf("\t%d*%d=%d ",i,j,i*j);
+					}
+					printf("\n");
+				}
+    			
+				break;
+			/*5.end*/	
+			case 'C':
+    		case 'c':	
+    		
+    			break;
+    		default:
+    			printf("輸入錯誤，請重新輸入。\n");
+    			getch();
+		}
+    
+	}
 	
-	system("PAUSE");
 	return 0;
 }
