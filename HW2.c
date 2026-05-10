@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <conio.h>
 
 int main(){
 	/*1.personal style home page*/
@@ -11,21 +10,20 @@ int main(){
 	printf("*	準備進入密碼驗證程序...          *\n");
 	printf("*                                        *\n");
 	printf("******************************************\n");
-	
 	//password input and verification
 	int password,n=0;
 	do{
 		printf("請輸入4位數密碼:");
-		fflush(stdin);	//clear input buffer
-		scanf(" %d",&password);
-		n++;
+		fflush(stdin);				//clear input buffer
+		scanf(" %d",&password);		//add a space before scanf to avoid reading the previous newline character
+		n++;						//increment the number of inputs by one
 		//check if the password is 2026
 		if(password==2026){
 			printf("密碼正確!歡迎進入系統。\n");
 			system("PAUSE");
 			system("CLS");
 		}
-		//if the password is entered incorrectly three times, an alarm will sound and the program will terminate.
+		//if the password is entered incorrectly three times, an alarm will sound and the program will terminate
 		else if(n==3){
 			printf("密碼錯誤!\a");
 			return 0;
@@ -41,15 +39,16 @@ int main(){
     	printf("|  c. 結束                               |\n");
     	printf("|                                        |\n");
     	printf("------------------------------------------\n");
-    
-    	char ch,letter;
-    	int i,j,number;
+    	
+    	char ch;
     	printf("請輸入選項:");
     	fflush(stdin);
     	scanf(" %c",&ch); 
     	
+    	char letter;
+    	int i,j,number;
     	switch(ch){
-    		/*3.draw a right triangle*/
+   	/*3.draw a right triangle*/
     		case 'A':
     		case 'a':
 				while(1){
@@ -57,12 +56,13 @@ int main(){
 					fflush(stdin);
     				scanf(" %c",&letter);
     				if(letter>='a'&&letter<='n'){
-    					break;
+    					break;		//break out of this while loop
 					}
 					if(letter<'a'||letter>'n'){
     					printf("字元不在'a'到'n'之間，請重新輸入。\n");	
 					}
 				}
+				//a right-angled triangle appears based on the input characters
     			for(i=1;i<=letter-'a'+1;i++){
     				//print out blank
     				for(j=0;j<=letter-'a'-i;j++){
@@ -78,7 +78,7 @@ int main(){
 				system("CLS");
 				break;
 				
-			/*4.show multiplication table*/	
+	/*4.show multiplication table*/	
 			case 'B':
     		case 'b':
     			while(1){
@@ -86,13 +86,14 @@ int main(){
 					fflush(stdin);
     				scanf(" %d",&number);
     				if(number>=1&&number<=9){
-    					break;
+    					break;	//break out of this while loop
 					}
 					if(number<1||number>9){
     					printf("數字不在1到9之間，請重新輸入。\n");	
 					}
 				}
-    			for(i=1;i<=number;i++){
+    			//display the multiplication table based on the input numbers
+				for(i=1;i<=number;i++){
     				for(j=1;j<=number;j++){
     					printf("\t%d*%d=%d ",i,j,i*j);
 					}
@@ -102,7 +103,7 @@ int main(){
 				system("CLS");
 				break;
 				
-			/*5.end*/	
+	/*5.end*/	
 			case 'C':
     		case 'c':	
     			while(1){
@@ -110,7 +111,7 @@ int main(){
 					fflush(stdin);
     				scanf(" %c",&letter);
     				if(letter=='Y'||letter=='y'){
-    					break;
+    					break;	//return to the main menu
 					}
 					if(letter=='N'||letter=='n'){
     					printf("程式結束。");	
@@ -120,11 +121,19 @@ int main(){
 						printf("輸入錯誤，請重新輸入。\n");	 
 					}
 				}
+				system("PAUSE");
+				system("CLS");
     			break;
     		default:
     			printf("輸入錯誤，請重新輸入。\n");
     			system("PAUSE");
+				system("CLS");
+				break;
 		}
 	}
 	return 0;
 }
+
+/*6.reflection*/
+/*
+*/
