@@ -25,16 +25,22 @@ int main(){
 			system("PAUSE");
 			system("CLS");
 		}
-		
+		//if the password is entered incorrectly three times, an alarm will sound and the program will terminate.
 		else if(i==3){
 			printf("密碼錯誤!\a");
 			return 0;
 		}
 	}while(password!=2026);
 	
+	/*2.show main menu*/
+	printf("------------------------------------------\n");
+    printf("|                                        |\n");
+    printf("|  a. 畫出直角三角形                     |\n");
+    printf("|  b. 顯示乘法表                         |\n");
+    printf("|  c. 結束                               |\n");
+    printf("|                                        |\n");
+    printf("------------------------------------------\n");
 	
-	
-
 	system("PAUSE");
 	return 0;
 }
