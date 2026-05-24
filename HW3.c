@@ -12,10 +12,11 @@ void initseat(){
 	    	seat[i][j]='-';
 		}
 	}
-	srand(time(NULL));
+	srand(time(NULL));	//initialize the random number generator
+	//ten reserved seats will be randomly selected.
 	while(count<10){
-		c=rand()%9;
-		r=rand()%9;
+		c=rand()%9;		//randomly generate column indexes (0~8)
+		r=rand()%9;		//randomly generate row indices (0~8)
 		if(seat[c][r]=='-'){
 			seat[c][r]='*';
 			count++;
@@ -51,13 +52,12 @@ int main(){
 		fflush(stdin);				//clear input buffer
 		scanf(" %d",&password);		//add a space before scanf to avoid reading the previous newline character
 		n++;						//increment the number of inputs by one
-		//check if the password is 2026
+		
 		if(password==2026){
 			printf("密碼正確!歡迎進入系統。\n");
 			system("PAUSE");
 			system("CLS");
 		}
-		//if the password is entered incorrectly three times, an alarm will sound and the program will terminate
 		else if(n==3){
 			printf("密碼錯誤!\n");
 			system("PAUSE");
@@ -106,10 +106,12 @@ int main(){
 				while(1){
 					c=rand()%9;
 					r=rand()%9;
+					//if the starting seats have already been reserved, draw new ones directly.
 					if(seat[c][r]=='*'){
 						continue;
 					}
-					if(r+k>=9){
+					//if the extracted value plus the number of people exceeds the array, then extract again.
+					if(c+1>=9||r+k>9){
 						continue;
 					}
 					
@@ -120,46 +122,92 @@ int main(){
 						}
 					}
 					else if(k==2){
-						if(seat[c][r]=='-'){
-							if(seat[c][r+1]=='-'){
-								seat[c][r]='@';
-								seat[c][r+1]='@';
-								break;
-							}
+						if(seat[c][r]=='-'&&seat[c][r+1]=='-'){
+							seat[c][r]='@';
+							seat[c][r+1]='@';
+							break;
 						}
 					}
 					else if(k==3){
-						if(seat[c][r]=='-'){
-							if(seat[c][r+1]=='-'){
-								if(seat[c][r+2]=='-'){
-									seat[c][r]='@';
-									seat[c][r+1]='@';
-									seat[c][r+2]='@';
-									break;
-								}
-							}
+						if(seat[c][r]=='-'&&seat[c][r+1]=='-'&&seat[c][r+2]=='-'){
+							seat[c][r]='@';
+							seat[c][r+1]='@';
+							seat[c][r+2]='@';
+							break;
 						}
 					}
 					else if(k==4){
-						if(seat[c][r]=='-'&&seat[c][r+1]=='-'&&seat[c+1][r]=='-'&&seat[c+1][r+1]=='-'){
-										seat[c][r]='@';
-										seat[c][r+1]='@';
-										seat[c+1][r]='@';
-										seat[c+1][r+1]='@';
-										break;
-						}	
-						else if(seat[c][r]=='-'&&seat[c][r+1]=='-'&&seat[c][r+2]=='-'&&seat[c][r+3]=='-'){
+						if(seat[c][r]=='-'&&seat[c][r+1]=='-'&&seat[c][r+2]=='-'&&seat[c][r+3]=='-'){
 							seat[c][r]='@';
 							seat[c][r+1]='@';
 							seat[c][r+2]='@';
 							seat[c][r+3]='@';
 							break;				
 						}
+						else if(seat[c][r]=='-'&&seat[c][r+1]=='-'&&seat[c+1][r]=='-'&&seat[c+1][r+1]=='-'){
+							seat[c][r]='@';
+							seat[c][r+1]='@';
+							seat[c+1][r]='@';
+							seat[c+1][r+1]='@';
+							break;
+						}	
 					}	
 				}
 				showseat();
 				while(1){
 					printf("是否滿意此座位安排(y/n): ");
+					fflush(stdin);
+	   				scanf(" %c",&ans);
+	   				if(ans=='y'){
+	   					//if you are not satisfied, replace '@' with '*'
+	   					for(i=0;i<9;i++){
+		    				for(j=0;j<9;j++){
+		    					if(seat[i][j]=='@'){
+								seat[i][j]='*';
+								}
+							}
+						}
+						break;
+				    }
+					else if(ans=='n'){
+						//if you are not satisfied, replace '@' with '-'
+	   					for(i=0;i<9;i++){
+		    				for(j=0;j<9;j++){
+		    					if(seat[i][j]=='@'){
+								seat[i][j]='-';
+								}
+							}
+						}
+						break;
+				    }
+				    else{
+				    	continue;
+					}
+				}
+    			system("PAUSE");
+				system("CLS");
+				break;
+	/*5.choose by yourself*/			
+			case 'c':
+    			while(1){
+    				showseat();
+    				printf("請輸入座位:");
+    				fflush(stdin);
+    				scanf(" %d-%d",&c,&r);
+    				if(c<1||c>9||r<1||r>9){
+    					printf("位置錯誤，請重新輸入。\n"); 
+    					continue;
+					}
+					if(seat[c-1][r-1]=='*'){
+						printf("此座位已被預訂，請重新輸入。\n");
+						continue;
+					}
+					seat[c-1][r-1]='@';
+					break;
+				}
+				showseat();
+				while(1){
+					printf("確認此座位嗎?(y/n): ");
 					fflush(stdin);
 	   				scanf(" %c",&ans);
 	   				if(ans=='y'){
@@ -184,37 +232,6 @@ int main(){
 				    }
 				    else{
 				    	continue;
-					}
-				}
-				
-    			system("PAUSE");
-				system("CLS");
-				break;
-	/*5.choose by yourself*/			
-			case 'c':
-    			while(1){
-    				showseat();
-    				printf("請輸入座位:");
-    				fflush(stdin);
-    				scanf(" %d-%d",&c,&r);
-    				if(c<1||c>9||r<1||r>9){
-    					printf("位置錯誤，請重新輸入。\n"); 
-    					continue;
-					}
-					if(seat[c-1][r-1]=='*'){
-						printf("此座位已被預訂，請重新輸入。\n");
-						continue;
-					}
-					seat[c-1][r-1]='@';
-					break;
-				}
-				showseat();
-				printf("確認無誤，按任意鍵繼續。\n");
-				for(i=0;i<9;i++){
-    				for(j=0;j<9;j++){
-    					if(seat[i][j]=='@'){
-						seat[i][j]='*';
-						}
 					}
 				}
     			system("PAUSE");
@@ -254,4 +271,5 @@ int main(){
 }
 
 /*7.reflection*/
-
+/*
+*/
