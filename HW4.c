@@ -234,4 +234,10 @@ int main(){
 
 /*8.reflection*/
 /*
+This C programming assignment helped me become more familiar with the use of structures, arrays, and functions.
+I also learned how to declare and use structure variables to store student data, such as using a structure array like `student stu[10]`, 
+which allows each record to include a name, student ID, and grades at the same time.
+During the implementation process, I encountered difficulties with the sorting logic, but through repeated testing I gradually understood the program flow.
+In particular, in the ranking function, I learned how to use structure variables to swap data, which helped me better understand the concept of sorting.
+This assignment made me realize that programming requires logic and patience, and it also improved my practical programming ability.
 */ 
