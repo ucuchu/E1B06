@@ -1,22 +1,23 @@
 #include <stdio.h>
 #include <stdlib.h>
-int N;
-//定義學生資料 
+#include <string.h>
+
+int N;	//number of students
+
 typedef struct {
 	char name[10];
 	char num[7];
 	int math,phy,eng;
 	float avg;
-}student;
-
-student stu[10];	//宣告學生陣列 
+}student;	//define student profile
+student stu[10];	//declare student array
 
 float average(student stu){
 	float avg;
 	avg=(stu.math+stu.phy+stu.eng)/3.0;
 	return avg;
 }
-//3.
+/*3.enter student information*/
 void enter(){
 	int i;
 	system("CLS");
@@ -30,20 +31,23 @@ void enter(){
 	}while(N<5||N>10);
 	
 	for(i=0;i<N;i++){
-		printf("學生 %d\n",i+1);
+		printf("學生%d\n",i+1);
 		printf("姓名:");
+		fflush(stdin);
 		scanf(" %s",stu[i].name);
 		
 		do{
 			printf("學號(6位整數):");
+			fflush(stdin);
 			scanf(" %s",stu[i].num);
-			if(strlen(stu[i].num) != 6) {
+			if(strlen(stu[i].num)!=6) {
     			printf("學號要為6位整數，請重新輸入。\n");
 				}
-		}while(strlen(stu[i].num) != 6);
+		}while(strlen(stu[i].num)!=6);
 		
 		do{
 			printf("數學成績:");
+			fflush(stdin);
 			scanf(" %d",&stu[i].math);
 			if(stu[i].math<0||stu[i].math>100){
 				printf("分數要0~100分，請重新輸入。\n");
@@ -52,6 +56,7 @@ void enter(){
 		
 		do{
 			printf("物理成績:");
+			fflush(stdin);
 			scanf(" %d",&stu[i].phy);
 			if(stu[i].phy<0||stu[i].phy>100){
 				printf("分數要0~100分，請重新輸入。\n");
@@ -60,6 +65,7 @@ void enter(){
 		
 		do{
 			printf("英文成績:");
+			fflush(stdin);
 			scanf(" %d",&stu[i].eng);
 			if(stu[i].eng<0||stu[i].eng>100){
 				printf("分數要0~100分，請重新輸入。\n");
@@ -69,24 +75,24 @@ void enter(){
 		stu[i].avg=average(stu[i]);
 	}
 }
-//4.
+/*4.ahow all student information*/
 void display(){
 	int i;
 	system("CLS");
-	printf(" 姓名\t學號\t數學\t物理\t英文\t平均\n");
-	printf("---------------------------------------------\n");
+	printf(" 姓名\t 學號\t 數學\t 物理\t 英文\t 平均\n");
+	printf("----------------------------------------------\n");
 	for(i=0;i<N;i++){
-		printf(" %s\t%s\t%d\t%d\t%d\t%.1f\n",stu[i].name,stu[i].num,
+		printf(" %s\t %s\t %d\t %d\t %d\t %.1f\n",stu[i].name,stu[i].num,
 			stu[i].math,stu[i].phy,stu[i].eng,stu[i].avg);
 	}
 }
-
-//5.
+/*5.search for students*/
 void search(){
 	char searchname[10];
 	int i,found=0;
 	system("CLS");
 	printf("請輸入要搜尋的學生姓名:");
+	fflush(stdin);
 	scanf(" %s",searchname);
 	
 	for(i=0;i<N;i++){
@@ -101,14 +107,50 @@ void search(){
 		printf("資料不存在。\n");
 	}
 }
-
-//6.
+/*6.sort by score*/
 void ranking(){
-	
-	
+	student temp[10];
+	int i,j;
+	system("CLS");
+	for(i=0;i<N;i++){
+        temp[i]=stu[i];
+    }
+    //do bubble sort
+	for(i=0;i<N-1;i++){
+        for(j=i+1;j<N;j++){
+            if(temp[i].avg<temp[j].avg){
+                student t=temp[i];
+                temp[i]=temp[j];
+                temp[j]=t;
+            }
+        }
+    }
+	//show ranking results
+	printf(" 姓名\t 學號\t 平均\n");
+	printf("----------------------\n");
+	for(i=0;i<N;i++){
+		printf(" %s\t %s\t %.1f\n",temp[i].name,temp[i].num,temp[i].avg);
+	}
 }
-
-
+/*7.confirm by leaving the system*/
+int exitsystem(){
+	char letter;
+	while(1){
+		printf("Continue?(y/n)" );
+		fflush(stdin);
+    	scanf(" %c",&letter);
+    	if(letter=='y'){
+    		return 1;
+		}
+		else if(letter=='n'){
+    		printf("程式結束。");	
+    		return 0;
+		}
+		else{
+			printf("輸入錯誤，請重新輸入。\n");	 
+		}
+	}
+}
 
 int main(){
 	/*1.personal style home page*/
@@ -140,6 +182,7 @@ int main(){
 	
 	/*2.show main menu*/
 	while(1){
+		system("CLS");
 		printf("-------- Grade System --------\n");
         printf("| a. Enter student grades    |\n");
         printf("| b. Display student grades  |\n");
@@ -157,33 +200,38 @@ int main(){
     		case 'a':
     			enter();
     			system("PAUSE");
-    			system("CLS");
     			break;
     		
 			case 'b':
 				display();
     			system("PAUSE");
-    			system("CLS");
     			break;
 			
 			case 'c':
 				search();
     			system("PAUSE");
-    			system("CLS");
     			break;
 				
 			case 'd':
 				ranking();
     			system("PAUSE");
-    			system("CLS");
     			break;
 				
 			case 'e':
+				if(!exitsystem()){
+					return 0;
+				}
     			system("PAUSE");
-    			system("CLS");
-    			break;				
+    			break;		
+			
+			default:
+    			printf("輸入錯誤，請重新輸入。\n");			
 		}
 	}
 	
 	return 0;
 } 
+
+/*8.reflection*/
+/*
+*/ 
