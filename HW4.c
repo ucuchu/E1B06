@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+int N;
 //定義學生資料 
 typedef struct {
 	char name[10];
@@ -15,9 +16,9 @@ float average(student stu){
 	avg=(stu.math+stu.phy+stu.eng)/3.0;
 	return avg;
 }
-//a
+//3.
 void enter(){
-	int N,i;
+	int i;
 	system("CLS");
 	do{
 		printf("請問要輸入幾筆學生資料(5~10):");
@@ -67,6 +68,44 @@ void enter(){
 		
 		stu[i].avg=average(stu[i]);
 	}
+}
+//4.
+void display(){
+	int i;
+	system("CLS");
+	printf(" 姓名\t學號\t數學\t物理\t英文\t平均\n");
+	printf("---------------------------------------------\n");
+	for(i=0;i<N;i++){
+		printf(" %s\t%s\t%d\t%d\t%d\t%.1f\n",stu[i].name,stu[i].num,
+			stu[i].math,stu[i].phy,stu[i].eng,stu[i].avg);
+	}
+}
+
+//5.
+void search(){
+	char searchname[10];
+	int i,found=0;
+	system("CLS");
+	printf("請輸入要搜尋的學生姓名:");
+	scanf(" %s",searchname);
+	
+	for(i=0;i<N;i++){
+		if(strcmp(stu[i].name,searchname)==0){
+			found=1;
+			printf("姓名:%s\n學號:%s\n數學:%d\n物理:%d\n英文:%d\n平均:%.1f\n",
+				stu[i].name,stu[i].num,stu[i].math,stu[i].phy,stu[i].eng,stu[i].avg);
+            break;   
+		}
+	}
+	if(!found){
+		printf("資料不存在。\n");
+	}
+}
+
+//6.
+void ranking(){
+	
+	
 }
 
 
@@ -122,16 +161,19 @@ int main(){
     			break;
     		
 			case 'b':
+				display();
     			system("PAUSE");
     			system("CLS");
     			break;
 			
 			case 'c':
+				search();
     			system("PAUSE");
     			system("CLS");
     			break;
 				
 			case 'd':
+				ranking();
     			system("PAUSE");
     			system("CLS");
     			break;
